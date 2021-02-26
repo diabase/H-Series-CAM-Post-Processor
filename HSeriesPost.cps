@@ -465,7 +465,7 @@ if (programName) {
 
 // RW Diabase optional are you sure warning
 //RW Diabase writeln("%");   
- writeln("M42 P103 S0"); 
+ writeln("M42 P5 S0"); 
  if (properties.writeWarning)  // allow user to set in fusion
 	 writeln("M291 P\"Starting machining now. No additional homing will be done. Make sure coordinates are set.\" R\"Crash Check\" S3");   
   
@@ -2692,7 +2692,7 @@ function onSectionEnd() {
 }
 
 function onClose() {
-  writeln("M42 P103 S1");
+  writeln("M42 P5 S1");
   writeln("M3 P0 S0");
   writeln("M3 P1 S0");
   writeln("M3 P2 S0");
