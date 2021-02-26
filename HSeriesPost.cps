@@ -2701,7 +2701,7 @@ function onClose() {
   writeln("M106 P5 S0");
   writeln("M106 P6 S0");
   writeln("M106 P7 S0");
-  writeln("M0");
+  writeln("M0 H1");
 
   }
 
