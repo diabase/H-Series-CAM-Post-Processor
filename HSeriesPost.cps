@@ -364,8 +364,8 @@ function onOpen() {
   gRotationModal.format(69); // Default to G69 Rotation Off
 
   if (true) {
-    var aAxis = createAxis({coordinate:0, table:true, axis:[(properties.makeAAxisOtherWay ? -1 : 1) * -1, 0, 0], cyclic:true, preference:1});
-	var cAxis = createAxis({coordinate:2, table:true, axis:[0, 0, 1], cyclic:true, range:[-13320, 13320], preference:0});
+    var aAxis = createAxis({coordinate:0, table:true, axis:[(properties.makeAAxisOtherWay ? -1 : 1) * 1, 0, 0], cyclic:true, preference:0});
+	var cAxis = createAxis({coordinate:2, table:true, axis:[0, 0, 1], cyclic:true, range:[-13320, 13320], preference:1});
     machineConfiguration = new MachineConfiguration(aAxis,cAxis);
 
     setMachineConfiguration(machineConfiguration);
