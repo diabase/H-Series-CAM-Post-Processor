@@ -4,6 +4,7 @@
 
 Diabase mods for Hermes
 reworked 5-2-2018
+Last Modified: November 17, 2021
 */
 
 description = "Diabase RRF3.3 or higher";
@@ -365,7 +366,7 @@ function onOpen() {
 
   if (true) {
     var aAxis = createAxis({coordinate:0, table:true, axis:[(properties.makeAAxisOtherWay ? -1 : 1) * 1, 0, 0], cyclic:true, preference:0});
-	var cAxis = createAxis({coordinate:2, table:true, axis:[0, 0, 1], cyclic:true, range:[-13320, 13320], preference:1});
+     var cAxis = createAxis({coordinate:2, table:true, axis:[0, 0, 1], cyclic:true, range:[-13320, 13320], preference:1});
     machineConfiguration = new MachineConfiguration(aAxis,cAxis);
 
     setMachineConfiguration(machineConfiguration);
@@ -464,7 +465,7 @@ if (programName) {
   }
 
  if (properties.writeWarning)  // allow user to set in fusion
-	 writeln("M291 P\"Starting machining now. No additional homing will be done. Make sure coordinates are set.\" R\"Crash Check\" S3");   
+      writeln("M291 P\"Starting machining now. No additional homing will be done. Make sure coordinates are set.\" R\"Crash Check\" S3");   
   
   if (properties.writeVersion) {
     if ((typeof getHeaderVersion == "function") && getHeaderVersion()) {
@@ -1214,7 +1215,7 @@ function onSection() {
     // stop spindle before retract during tool change
     if (insertToolCall && !isFirstSection() && !toolChecked && !properties.fastToolChange) {
       onCommand(COMMAND_STOP_SPINDLE);
-	  //writeBlock(mFormat.format(tool.clockwise ? 3 : 4),"P",toolFormat.format(tool.number),"S0"); //has new tool number at this point
+       //writeBlock(mFormat.format(tool.clockwise ? 3 : 4),"P",toolFormat.format(tool.number),"S0"); //has new tool number at this point
     }
     
     // retract to safe plane
@@ -1354,7 +1355,7 @@ function onSection() {
       warning(localize("Spindle speed exceeds maximum value."));
     }
     writeBlock(mFormat.format(tool.clockwise ? 3 : 4),sOutput.format(tool.spindleRPM)
-    );	  
+    );
   }
   //      sOutput.format(tool.spindleRPM), mFormat.format(tool.clockwise ? 3 : 4),"HERE"
   if (properties.useParametricFeed &&
@@ -2517,8 +2518,8 @@ function setCoolant(coolant) {
     } else {
       m = 107;
     }
-    writeBlock("M5")		//turn off spindle
-	writeBlock("M106 S0") 	//turn off air
+    writeBlock("M5")           //turn off spindle
+    writeBlock("M106 S0")      //turn off air
 
     if (m2) {
       writeBlock(mFormat.format(m2));
@@ -2554,7 +2555,7 @@ function setCoolant(coolant) {
       return;
     }
     coolant = COOLANT_OFF;
-	writeBlock(operationNeedsSafeCoolant ? "/" : "", mFormat.format(m),"S0" );
+     writeBlock(operationNeedsSafeCoolant ? "/" : "", mFormat.format(m),"S0" );
     m = 107;
   }
 
@@ -2587,7 +2588,7 @@ function onCommand(command) {
     return;
   case COMMAND_COOLANT_OFF:
     setCoolant(COOLANT_OFF);
-	return;
+     return;
   case COMMAND_START_SPINDLE:
     onCommand(tool.clockwise ? COMMAND_SPINDLE_CLOCKWISE : COMMAND_SPINDLE_COUNTERCLOCKWISE);
     return;
@@ -2683,10 +2684,10 @@ function onSectionEnd() {
 }
 
 function onClose() {
-  writeln("M5");		//turn off spindle
-  writeln("M106 S0");	//turn off air
+  writeln("M5");          //turn off spindle
+  writeln("M106 S0");     //turn off air
 
-  writeln("M0");		//stop
+  writeln("M0");          //stop
 
   }
 
