@@ -4,7 +4,7 @@
 
 Diabase mods for Hermes
 reworked 5-2-2018
-Last Modified: November 17, 2021
+Last Modified: January 06, 2022
 */
 
 description = "Diabase RRF3.3 or higher";
@@ -69,6 +69,16 @@ properties = {
   fastToolChange: false, // skip spindle off, coolant off, and Z retract to make tool change quicker
   useG95forTapping: false, // use IPR/MPR instead of IPM/MPM for tapping
   useG73Retract: false // use G73 Q K format for accumulated depth support
+  machineModel: {
+      title: "H-Series Machine Model",
+      description: "Selects the model of H-Series machine running this G-code",
+      type: "enum",
+      values:[
+      {title:"H4", id:"H4"},
+      {title:"H5A", id:"H5A"},
+      {title:"H5B", id:"H5B"}
+      ]
+  }
 };
 
 propertyDefinitions = {
@@ -1351,7 +1361,7 @@ function onSection() {
       error(localize("Spindle speed out of range."));
       return;
     }
-    if (tool.spindleRPM > 10000) {
+    if ((((properties.machineModel == "H4") || (properties.machineModel == "H5A")) && (tool.spindleRPM > 10000)) || ((properties.machineModel == "H5B") && (tool.spindleRPM > 16000))){
       warning(localize("Spindle speed exceeds maximum value."));
     }
     writeBlock(mFormat.format(tool.clockwise ? 3 : 4),sOutput.format(tool.spindleRPM)
