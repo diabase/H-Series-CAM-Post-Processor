@@ -4,7 +4,7 @@
 
 Diabase mods for Hermes
 reworked 5-2-2018
-Last Modified: January 06, 2022
+Last Modified: January 07, 2022
 */
 
 description = "Diabase RRF3.3 or higher";
@@ -68,17 +68,9 @@ properties = {
   safeStartAllOperations: false, // write optional blocks at the beginning of all operations that include all commands to start program
   fastToolChange: false, // skip spindle off, coolant off, and Z retract to make tool change quicker
   useG95forTapping: false, // use IPR/MPR instead of IPM/MPM for tapping
-  useG73Retract: false // use G73 Q K format for accumulated depth support
-  machineModel: {
-      title: "H-Series Machine Model",
-      description: "Selects the model of H-Series machine running this G-code",
-      type: "enum",
-      values:[
-      {title:"H4", id:"H4"},
-      {title:"H5A", id:"H5A"},
-      {title:"H5B", id:"H5B"}
-      ]
-  }
+  useG73Retract: false, // use G73 Q K format for accumulated depth support
+  machineModel: "H5B"
+
 };
 
 propertyDefinitions = {
@@ -111,7 +103,17 @@ propertyDefinitions = {
   safeStartAllOperations: {title:"Safe start all operations", description:"Write optional blocks at the beginning of all operations that include all commands to start program.", type:"spatial"},
   fastToolChange: {title:"Fast tool change", description:"Skip spindle off, coolant off, and Z retract to make tool change quicker.", type:"boolean"},
   useG95forTapping: {title:"Use G95 for tapping", description:"use IPR/MPR instead of IPM/MPM for tapping", type:"boolean"},
-  useG73Retract: {title:"G73 cycles include accumulated depth", description:"Use G73 Q K format for accumulated depth support.", type:"boolean"}
+  useG73Retract: {title:"G73 cycles include accumulated depth", description:"Use G73 Q K format for accumulated depth support.", type:"boolean"},
+  machineModel: {
+      title: "H-Series Machine Model",
+      description: "Selects the model of H-Series machine running this G-code",
+      type: "enum",
+      values:[
+      {title:"H4", id:"H4"},
+      {title:"H5A", id:"H5A"},
+      {title:"H5B", id:"H5B"}
+      ]
+  }
 };
 
 
