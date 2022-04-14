@@ -69,7 +69,8 @@ properties = {
   fastToolChange: false, // skip spindle off, coolant off, and Z retract to make tool change quicker
   useG95forTapping: false, // use IPR/MPR instead of IPM/MPM for tapping
   useG73Retract: false, // use G73 Q K format for accumulated depth support
-  machineModel: "H5B"
+  machineModel: "H5B",
+  useMeshCompensation: false // run G29 S1 at start of the file to activate mesh compensation
 
 };
 
@@ -113,7 +114,8 @@ propertyDefinitions = {
       {title:"H5A", id:"H5A"},
       {title:"H5B", id:"H5B"}
       ]
-  }
+  },
+  useMeshCompensation: {title:"Use mesh compensation", description:"Run G29 S1 at the beginning of the job to activate mesh compensation.", type:"boolean"}
 };
 
 
@@ -476,9 +478,14 @@ if (programName) {
     }
   }
 
- if (properties.writeWarning)  // allow user to set in fusion
+  if (properties.writeWarning)  // allow user to set in fusion
       writeln("M291 P\"Starting machining now. No additional homing will be done. Make sure coordinates are set.\" R\"Crash Check\" S3");   
-  
+
+  if (properties.useMeshCompensation)
+      writeln("G29 S1");
+  else
+      writeln("G29 S2");
+
   if (properties.writeVersion) {
     if ((typeof getHeaderVersion == "function") && getHeaderVersion()) {
       writeComment(localize("post version") + ": " + getHeaderVersion());
